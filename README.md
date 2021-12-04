@@ -87,9 +87,6 @@ http://127.0.0.1:8000/users
 	"password":"123",
 	"phone":"77900000000"
 }
-
-Read:
-
 ```
 
 Read
