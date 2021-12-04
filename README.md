@@ -50,6 +50,12 @@ Rode o comando :
 php artisan optimize
 ```
 
+Rode o servidor :
+
+```
+php artisan serve
+```
+
 ## Autor
 
 > [Filipi Campos](https://www.linkedin.com/in/7lipe/)
