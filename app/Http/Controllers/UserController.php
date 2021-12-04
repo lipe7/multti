@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
 use App\Services\UserService;
-use Exception;
 
 class UserController extends Controller
 {
@@ -27,34 +25,22 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        try {
-            $user = $this->user_service->store($request);
-        } catch (Exception $e) {
-            $user = [
-                'status' => 500,
-                'error' => $e->getMessage()
-            ];
-        }
 
-        return response()->json($user);
+        return $this->user_service->store($request);
     }
 
     public function show($id)
     {
-        $users = $this->user_service->getUser($id);
-        return $users;
+        return $this->user_service->getUser($id);
     }
 
     public function update(UpdateUserRequest $request, $id)
     {
-        $update = $this->user_service->update($request, $id);
-        return $update;
+        return $this->user_service->update($request, $id);
     }
 
     public function destroy($id)
     {
-        $delete = $this->user_service->destroy($id);
-
-        return $delete;
+        return $this->user_service->destroy($id);
     }
 }

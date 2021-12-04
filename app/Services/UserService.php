@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Http\Requests\StoreUserRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Traits\FormatPhone;
 use App\Repositories\UserRepository;
+use Error;
+use Exception;
+use Illuminate\Validation\ValidationException;
 
 class UserService
 {
@@ -29,32 +29,55 @@ class UserService
 
     public function store($request)
     {
-        $request->phone = $this->phoneToInt($request->phone);
-        $newUser = $this->user_repository->newUser($request);
+        try {
+            $request->phone = $this->phoneToInt($request->phone);
+            $newUser = $this->user_repository->newUser($request);
+
+            return response()->json($newUser);
+        } catch (Exception $e) {
+            $newUser = [
+                'status' => 500,
+                'error' => $e->getMessage()
+            ];
+        }
 
         return $newUser;
     }
 
     public function getUser($id)
     {
-        $user = $this->user_repository->getUser($id);
-
-        if (!$user) {
-            return response()->json(['error' => 'User not registered.'], 404);
+        try {
+            $user = $this->user_repository->getUser($id);
+            if (!$user) {
+                throw new Error("User not registered.", 422);
+            }
+            return response()->json($user);
+        } catch (\Throwable $th) {
+            throw ValidationException::withMessages([
+                "message" => $th->getMessage(),
+                "code" => $th->getCode(),
+            ]);
         }
-
-        return $user;
     }
-
 
     public function update($request, $id)
     {
-        $user = $this->user_repository->getUser($id);
-        if (!$user) {
-            return response()->json(['error' => 'User not registered.'], 500);
+        try {
+            $user = $this->user_repository->getUser($id);
+
+            if ($user) {
+                $userUpdate = $this->user_repository->update($request, $id);
+            } else {
+                throw new Error("User not registered.", 422);
+            }
+
+            return response()->json($userUpdate);
+        } catch (\Throwable $th) {
+            throw ValidationException::withMessages([
+                "message" => $th->getMessage(),
+                "code" => $th->getCode()
+            ]);
         }
-        $userUpdate = $this->user_repository->update($request, $id);
-        return response()->json($userUpdate);
     }
 
     public function destroy($id)

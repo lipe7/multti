@@ -2,6 +2,7 @@
 
 ## Descrição do Projeto
 
+-   Versão Laravel 8.74.0
 -   Versão PHP 7.4.9
 -   Versão MySQL 5.7
 
