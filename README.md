@@ -27,6 +27,17 @@ Gere o APP_KEY executando:
 php artisan key:generate
 ```
 
+Crie um banco e configure no .env:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE='nome_do_banco'
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
 Rode as migrations :
 
 ```
