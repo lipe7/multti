@@ -79,14 +79,14 @@ ListAll:
 
 ```
 GET:
-http://127.0.0.1:8000/users
+http://127.0.0.1:8000/api/users
 ```
 
 Create
 
 ```
 POST:
-http://127.0.0.1:8000/users
+http://127.0.0.1:8000/api/users
 {
 	"name":"Felipe",
 	"email":"felipe@mail.com",
@@ -99,14 +99,14 @@ Read
 
 ```
 GET:
-http://127.0.0.1:8000/users/1
+http://127.0.0.1:8000/api/users/1
 ```
 
 Update:
 
 ```
 PUT:
-http://127.0.0.1:8000/users/1
+http://127.0.0.1:8000/api/users/1
 {
     "name":"Felipe",
     "email":"felipe@mail.com.br",
@@ -120,7 +120,7 @@ Delete:
 
 ```
 DELETE:
-http://127.0.0.1:8000/users/1
+http://127.0.0.1:8000/api/users/1
 
 
 ```
