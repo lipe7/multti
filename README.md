@@ -65,7 +65,7 @@ php artisan serve
 
 ### EndPoints
 
-`Arquivo insominia `InsomniaCrud` na raiz do projeto.`
+`Arquivo insomnia `InsomniaCrud` na raiz do projeto.`
 
 version:
 
